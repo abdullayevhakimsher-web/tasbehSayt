@@ -1,0 +1,783 @@
+/* ==========================================================================
+   1. VARIABLES & RESET (Asosiy sozlamalar)
+   ========================================================================== */
+:root {
+    --primary-color: #ff4757;      /* Asosiy rang (masalan, ovqatlar uchun yorqin qizil) */
+    --secondary-color: #2f3542;    /* To'q matn va fonlar uchun */
+    --accent-color: #ffa502;       /* Aksent rang (bonuslar, yulduzchalar uchun) */
+    --light-bg: #f1f2f6;           /* Och fon rang */
+    --white: #ffffff;
+    --text-muted: #747d8c;         /* Kuchsizlashtirilgan matn rangi */
+    --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    --hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --radius-sm: 8px;
+    --radius-md: 15px;
+    --radius-lg: 30px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #03152e;
+    background-image: radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08), transparent 25%);
+    color: #f4f7ff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. REUSABLE COMPONENTS (Qayta ishlatiladigan elementlar)
+   ========================================================================== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: var(--radius-lg);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    border: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), #ff6b81);
+    color: var(--white);
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 71, 87, 0.5);
+}
+
+.btn-secondary {
+    background-color: var(--white);
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    transform: translateY(-3px);
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+/* ==========================================================================
+   3. HERO SECTION (Asosiy banner qismi)
+   ========================================================================== */
+.hero {
+    background: radial-gradient(ellipse at bottom, #021029 0%, #000814 60%, #000 100%);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 60px 0;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* Ensure hero content sits above the decorative sky */
+.hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Moon */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 8%;
+    right: 12%;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f0f2f5 30%, rgba(240,240,245,0.25) 60%, rgba(255,255,255,0.06) 100%);
+    box-shadow: 0 0 40px rgba(255,255,255,0.06);
+    z-index: 0;
+}
+
+/* Stars layer (subtle, repeating pattern with slight twinkle) */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(2px 2px at 20% 15%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 40% 40%, #fff 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 70% 25%, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 85% 70%, #fff 50%, transparent 51%),
+        radial-gradient(1.2px 1.2px at 10% 80%, #fff 50%, transparent 51%),
+        radial-gradient(0.9px 0.9px at 50% 10%, #fff 50%, transparent 51%);
+    background-size: 240px 240px, 180px 180px, 220px 220px, 260px 260px, 200px 200px, 150px 150px;
+    opacity: 0.95;
+    z-index: 0;
+    pointer-events: none;
+    animation: twinkle 4s linear infinite;
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 550px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background-color: rgba(255, 71, 87, 0.1);
+    color: var(--primary-color);
+    padding: 6px 16px;
+    border-radius: var(--radius-lg);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.hero-content h1 span {
+    color: var(--primary-color);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.95; }
+    50% { opacity: 0.65; }
+}
+
+/* ==========================================================================
+   4. FEATURES SECTION (Imkoniyatlar / Bonuslar bloki)
+   ========================================================================== */
+.home-tasbeh {
+    max-width: 460px;
+    margin: 60px auto;
+    padding: 36px 32px;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 30%),
+                linear-gradient(180deg, #091f45 0%, #031221 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 36px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-tasbeh::before,
+.home-tasbeh::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+}
+
+.home-tasbeh::before {
+    top: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fdfaf1 0%, #f3eedf 28%, rgba(255, 255, 255, 0.12) 55%, transparent 70%);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
+    animation: pulseGlow 8s ease-in-out infinite;
+}
+
+.home-tasbeh::after {
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.95) 0%, transparent 6%),
+        radial-gradient(circle at 45% 10%, rgba(255,255,255,0.9) 0%, transparent 5%),
+        radial-gradient(circle at 75% 18%, rgba(255,255,255,0.85) 0%, transparent 5%),
+        radial-gradient(circle at 30% 55%, rgba(255,255,255,0.92) 0%, transparent 5%),
+        radial-gradient(circle at 60% 40%, rgba(255,255,255,0.88) 0%, transparent 5%),
+        radial-gradient(circle at 82% 68%, rgba(255,255,255,0.9) 0%, transparent 4%),
+        radial-gradient(circle at 18% 80%, rgba(255,255,255,0.8) 0%, transparent 4%);
+    background-size: 100% 100%;
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+.night-decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.mini-star {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+    animation: twinkle 3.5s ease-in-out infinite alternate;
+}
+
+.star-1 { top: 20%; left: 18%; }
+.star-2 { top: 12%; right: 22%; animation-delay: 0.8s; }
+.star-3 { bottom: 22%; left: 28%; animation-delay: 1.2s; }
+.star-4 { bottom: 15%; right: 30%; animation-delay: 0.4s; }
+
+.shooting-star {
+    position: absolute;
+    top: 10%;
+    left: 70%;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: translate(-50%, -50%);
+    animation: shooting 2.5s ease-in-out infinite;
+}
+
+.shooting-star::after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(255,255,255,0) 100%);
+    transform: translate(-50%, -50%) rotate(-18deg);
+    opacity: 0.6;
+}
+
+.rocket {
+    position: absolute;
+    width: 18px;
+    height: 42px;
+    bottom: 18%;
+    left: 12%;
+    background: linear-gradient(180deg, #f8f8f8 0%, #c9d7ff 100%);
+    border-radius: 12px 12px 4px 4px;
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+    transform: rotate(-18deg);
+    animation: rocket-fly 6s linear infinite;
+}
+
+.rocket::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #3a5fff;
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+.rocket::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(255, 255, 255, 0));
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes shooting {
+    0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+    10% { opacity: 1; }
+    45% { transform: translate(-250px, 120px) scale(1.1); opacity: 1; }
+    100% { transform: translate(-520px, 260px) scale(0.5); opacity: 0; }
+}
+
+@keyframes rocket-fly {
+    0% { transform: translate(0, 0) rotate(-18deg); }
+    50% { transform: translate(40px, -30px) rotate(-12deg); }
+    100% { transform: translate(0, 0) rotate(-18deg); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.3); }
+    50% { box-shadow: 0 0 60px rgba(255, 255, 255, 0.55); }
+}
+
+@media (max-width: 720px) {
+    .home-tasbeh {
+        margin: 30px 20px;
+        padding: 30px 24px;
+    }
+
+    .count-display {
+        font-size: 3.8rem;
+    }
+
+    .status-info {
+        grid-template-columns: 1fr;
+    }
+
+    .button-row {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 520px) {
+    .home-tasbeh {
+        padding: 24px 18px;
+        border-radius: 28px;
+    }
+
+    .home-heading {
+        margin-bottom: 18px;
+    }
+
+    .count-display {
+        font-size: 3rem;
+    }
+
+    .subtitle,
+    .tasbeh-bismillah {
+        font-size: 0.95rem;
+    }
+}
+
+.home-heading {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 22px;
+}
+
+.tasbeh-bismillah {
+    font-size: 1rem;
+    color: #f8db6f;
+    margin-bottom: 12px;
+    letter-spacing: 0.12em;
+    font-family: 'Scheherazade New', serif;
+}
+
+.count-display {
+    font-size: 4.5rem;
+    color: #f7d06c;
+    margin-bottom: 10px;
+    text-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+.status-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.87);
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px 18px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    position: relative;
+    z-index: 1;
+}
+
+.status-info p {
+    margin: 0;
+}
+
+.marks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.mark,
+.mark-empty {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 56px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.mark {
+    background: rgba(255, 224, 130, 0.18);
+    color: #fff7d0;
+    border: 1px solid rgba(255, 224, 130, 0.3);
+}
+
+.mark-empty {
+    color: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.18);
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn {
+    min-width: 120px;
+    padding: 14px 0;
+    border-radius: 999px;
+    font-size: 1rem;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ffd45a, #f9b72f);
+    color: #102a16;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #ffe57f, #f7cb33);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.progress-bar {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-track {
+    width: 100%;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f9d35c, #f6a800);
+    transition: width 0.3s ease;
+}
+.features {
+    padding: 80px 0;
+    background-color: var(--white);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background-color: var(--light-bg);
+    padding: 35px 25px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    background-color: var(--white);
+    box-shadow: var(--hover-shadow);
+}
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    background-color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition-smooth);
+}
+
+.feature-card:hover .feature-icon {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   5. PRODUCT GRID SECTION (Kategoriyalar va Maxsulot kartalari)
+   ========================================================================== */
+.products-section {
+    padding: 80px 0;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.product-img-wrapper {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+.product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.product-card:hover img {
+    transform: scale(1.08);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: var(--accent-color);
+    color: var(--white);
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.product-rating {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.product-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f1f2f6;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--secondary-color);
+}
+
+.product-price span {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    margin-left: 2px;
+}
+
+.btn-add-cart {
+    width: 40px;
+    height: 40px;
+    background-color: var(--light-bg);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+}
+
+.product-card:hover .btn-add-cart {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE DESIGN (Mobil moslashuvchanlik)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .hero-image {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr; /* Mobil telefonda kartalar 1 qatordan chiroyli joylashadi */
+    }
+}
